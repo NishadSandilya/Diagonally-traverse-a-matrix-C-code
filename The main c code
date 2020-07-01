@@ -1,0 +1,73 @@
+#include<stdio.h>
+#include<stdlib.h>
+int r,c;
+void print(int arr[r][c]){
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+void print_diag_matrix(int arr[r][c]){
+    int cr=0;//current row//
+    int cc=0;//current col//
+    char dir='U';
+    while(1){      //dont worry, will run exactly for about r*c times//
+        if(dir=='U'){
+            if(cr==0 && cc==0)
+            printf("%d ", arr[cr][cc]);
+            else if(cr==r-1 && cc==c-1)
+            {
+            printf("%d ", arr[cr][cc]);
+            break;
+            }
+            else{
+                while(cr>=0 && (cr>=0&&cc<=c-1) && cc<=c-1)
+                    printf("%d ", arr[cr--][cc++]);
+                    cr++;cc--;
+            }
+            if(cc<c-1){
+                dir='D';
+                cc++;
+            }
+            else{
+                dir='D';
+                cr++;
+            }
+        } 
+        if(dir=='D'){
+            if(cr==r-1&&cc==c-1){
+            printf("%d ", arr[cr][cc]);
+            break;
+        }
+        else{
+            while(cc>=0 && (cc>=0&&cr<=r-1) && cr<=r-1)
+                printf("%d ", arr[cr++][cc--]);
+                cr--;cc++;
+        }
+        if(cr==r-1){
+            dir='U';
+            cc++;
+        }
+        else{
+            dir='U';
+            cr++;
+        }
+    }
+}
+}
+int main() {
+    scanf("%d %d", &r, &c);
+    int arr[r][c];
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            scanf("%d", &arr[i][j]);
+        }
+    }
+    printf("Original Matrix: \n");
+    print(arr);
+    printf("\nDiagonally traversed Matrix: \n");
+    print_diag_matrix(arr);
+    return 0;
+}
