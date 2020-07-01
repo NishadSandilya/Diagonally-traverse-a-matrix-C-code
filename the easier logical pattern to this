@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<stdlib.h>
+int r,c;
+int min(int a, int b){
+    return a<b?a:b;
+}
+int max(int a, int b){
+    return a>b?a:b;
+}
+int min_three(int a, int b, int c){
+    return min(min(a,b),c);
+}
+void print(int arr[r][c]){
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+void print_diag(int arr[r][c]){
+    for(int line=1;line<=((r+c)-1);line++){
+        int s_row=min(r-1,line-1);
+        int s_col=max(0,line-r);
+        int count=min_three(line,c-s_col,r);
+        for(int i=0;i<count;i++){
+            printf("%d ", arr[s_row-i][s_col+i]);
+        }
+    }
+}
+int main() {
+    scanf("%d %d", &r, &c);
+    int arr[r][c];
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            scanf("%d", &arr[i][j]);
+        }
+    }
+    print(arr);
+    print_diag(arr);
+    return 0;
+}
